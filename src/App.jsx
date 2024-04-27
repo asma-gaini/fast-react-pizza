@@ -8,17 +8,27 @@ import Menu from "./features/menu/Menu";
 import Cart from "./features/cart/Cart";
 import CreateOrder from "./features/order/CreateOrder";
 import Order from "./features/order/Order";
+import AppLayout from "./ui/AppLayout";
 
 //in functioni hast k ma hame masir haru dakhelesh tarif mikonim
 //ba arraye e az obj ha ,k har obj ye masir hastesh
 //bara estefade az natayej ono dar ye moteghayer zakhire mikonim
 const router = createBrowserRouter([
-  { path: "/", element: <Home /> },
-  { path: "/menu", element: <Menu /> },
-  { path: "/cart", element: <Cart /> },
-  { path: "/order/new", element: <CreateOrder /> },
-  //bara barresi ye sefaresh mojod ba params
-  { path: "/order/:orderId", element: <Order /> },
+  //hala ma mikhaym kolan masir asli applayout bashe   yani header va cart
+  //hamvare namayesh dade beshan va faghat on vasat taghir kone
+  //ma baraye masir haye tu dar tu dg mese ghabl amal nemikonim va az children estefade mikonim
+  {
+    //masir asli va tarh bande k path nadare
+    element: <AppLayout />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/menu", element: <Menu /> },
+      { path: "/cart", element: <Cart /> },
+      { path: "/order/new", element: <CreateOrder /> },
+      //bara barresi ye sefaresh mojod ba params
+      { path: "/order/:orderId", element: <Order /> },
+    ],
+  },
 ]);
 
 function App() {
