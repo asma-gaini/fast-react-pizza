@@ -4,7 +4,9 @@
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./ui/Home";
-import Menu from "./features/menu/Menu";
+//miyaym loaderi k export kardim import konim k b masir motasel konim
+//chon momkene chandta loader dashte bashim  hamin ja esmesho avaz mikonim ba as
+import Menu, { loader as menuLoader } from "./features/menu/Menu";
 import Cart from "./features/cart/Cart";
 import CreateOrder from "./features/order/CreateOrder";
 import Order from "./features/order/Order";
@@ -22,7 +24,8 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/menu", element: <Menu /> },
+      //2)etesal loader b masir
+      { path: "/menu", element: <Menu />, loader: menuLoader },
       { path: "/cart", element: <Cart /> },
       { path: "/order/new", element: <CreateOrder /> },
       //bara barresi ye sefaresh mojod ba params
