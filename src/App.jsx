@@ -26,12 +26,20 @@ const router = createBrowserRouter([
 
     //baraye handle kardan khataha dar router miyaym ye element khata tarif mikonim(tu router hast)
     //vaghti dar render kardan component b error khorg errorelement ru render kone
+    //chon k in errorElement kharej az layout hast ye safhe dare jaygozin layout mishe k ma nemikhaym
+    //pas miyaym mizarimesh zir loader chon alan tanha jayii hast k dar bargiri data momkene khata bede
+    //va in balam gharar dadim chon tu har masir k b moshkel bokhore ta bala miyad
     errorElement: <Error />,
 
     children: [
       { path: "/", element: <Home /> },
       //2)etesal loader b masir
-      { path: "/menu", element: <Menu />, loader: menuLoader },
+      {
+        path: "/menu",
+        element: <Menu />,
+        loader: menuLoader,
+        errorElement: <Error />,
+      },
       { path: "/cart", element: <Cart /> },
       { path: "/order/new", element: <CreateOrder /> },
       //bara barresi ye sefaresh mojod ba params
