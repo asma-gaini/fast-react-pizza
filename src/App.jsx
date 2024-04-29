@@ -11,6 +11,7 @@ import Cart from "./features/cart/Cart";
 import CreateOrder from "./features/order/CreateOrder";
 import Order from "./features/order/Order";
 import AppLayout from "./ui/AppLayout";
+import Error from "./ui/Error";
 
 //in functioni hast k ma hame masir haru dakhelesh tarif mikonim
 //ba arraye e az obj ha ,k har obj ye masir hastesh
@@ -22,6 +23,11 @@ const router = createBrowserRouter([
   {
     //masir asli va tarh bande k path nadare
     element: <AppLayout />,
+
+    //baraye handle kardan khataha dar router miyaym ye element khata tarif mikonim(tu router hast)
+    //vaghti dar render kardan component b error khorg errorelement ru render kone
+    errorElement: <Error />,
+
     children: [
       { path: "/", element: <Home /> },
       //2)etesal loader b masir
