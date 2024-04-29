@@ -5,7 +5,6 @@ import MenuItem from "./MenuItem";
 function Menu() {
   //3)get data into the component with custom hook(useLoaderData)
   const menu = useLoaderData();
-  console.log(menu);
 
   return (
     <ul>
