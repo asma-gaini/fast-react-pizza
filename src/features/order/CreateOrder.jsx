@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Form } from "react-router-dom";
+import { Form, redirect } from "react-router-dom";
+import { createOrder } from "../../srvices/apiRestaurant";
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
@@ -104,7 +105,6 @@ export async function action({ request }) {
   const formData = await request.formData();
   //omadim formi k jam kardim ru b obj tabdil karim
   const data = Object.fromEntries(formData);
-  console.log(data);
 
   //data ru k log migereftim priority hamishe nadash faghat vaghti bood mizad on k ma mikhastim false and true bashe
   //va mohtavaye cart ru b sorat araye dar ovordim
@@ -113,9 +113,11 @@ export async function action({ request }) {
     cart: JSON.parse(data.cart),
     priority: data.priority === "on",
   };
-  console.log(order);
-
-  return null;
+  const newOrder = await createOrder(order);
+  //tu apiResturant mibinim k createOrder on data ru barmigardone pas mitunim azash estefade konim ta moshtari ru b masir order/id bebarim ta sefaresh ru bbebine
+  //vali nemitunim az navigate hook estefade konim chon ghabln ham goftim hook ha dar component mitunan estefade beshan faght
+  // pas miyaym az redirect estefade mikonim k ye response jadid ya ye darkhast jadid ijad mikone
+  return redirect(`/order/${newOrder.id}`);
 }
 
 export default CreateOrder;
