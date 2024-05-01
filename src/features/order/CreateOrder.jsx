@@ -33,6 +33,10 @@ const fakeCart = [
 
 function CreateOrder() {
   // const [withPriority, setWithPriority] = useState(false);
+
+  //ma mikhaym in cart ya sabad kharid ru tu form ersal konim ta tu action besh dastresi dashte bashim
+  //haminjori azash estefade nemikonim chon sabad kharid badan gharare az redux biyad
+  //ma mitunim dade tu form gharar bedim bedon inke joze filde form bashe ba type hidden
   const cart = fakeCart;
 
   return (
@@ -83,6 +87,8 @@ function CreateOrder() {
         </div>
 
         <div>
+          <input type="hidden" name="cart" value={JSON.stringify(cart)} />
+          {/* value chon havi maghadire obj hast vali ma faghat mitunim inja string dashte bashim */}
           <button>Order now</button>
         </div>
       </Form>
