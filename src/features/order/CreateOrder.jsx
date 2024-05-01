@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Form } from "react-router-dom";
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
@@ -38,7 +39,19 @@ function CreateOrder() {
     <div>
       <h2>Ready to order? Let's go!</h2>
 
-      <form>
+      {/* bara ersal in form miyaym az noe form tu roter estefade mikonim(Form) yani dg az submit o handler estefade nakardim
+      hata bara input haye form state niyaz nist, va method ru moshakhas mikonim
+      in ravesh faghat bara POST, PATCH ,DELETE kar mikone vali bara get injor nist
+      action masiri ast k form bayad onja ersal beshe k router b tor khodkar b nazdiktarin masir mide yani niyazi nist bezanim order/new 
+      badesh mese loader bayad ye function dashete bashim k action mikhad azash export she
+      */}
+
+      {/* ersal ba router 3 marhale dasht 1) omadim Form ru jaygozin form kardim
+          2) omadim tabe action ru ba requestemon neveshtim 
+          3) bayad in form o tabe ru b ham vasl konim b masir mirim va action ru b masir vasl mikonim aval tu app import mikonim*/}
+
+      {/* <Form method="POST" action="/order/new"> */}
+      <Form method="POST">
         <div>
           <label>First Name</label>
           <input type="text" name="customer" required />
@@ -72,9 +85,21 @@ function CreateOrder() {
         <div>
           <button>Order now</button>
         </div>
-      </form>
+      </Form>
     </div>
   );
+}
+
+//be sorat gharardadi esmesho action mizarim
+//harvaght k Form bala ersal beshe betor khodkar action seda mishe va darkhast ersal mishe
+export async function action({ request }) {
+  //in request hamin requestiye k daryaft karmin va in ye api web hast va formData tavasote mororgar eraye mishe
+  //tabe formData ye rabet hast k mizare form ha mese form ha tu html amal konan va betunim anasur vorudi mese fild haye matni , ...ru jamavari konim
+  const formData = await request.formData();
+  //omadim formi k jam kardim ru b obj tabdil karim
+  const data = Object.fromEntries(formData);
+  console.log(data);
+  return null;
 }
 
 export default CreateOrder;
