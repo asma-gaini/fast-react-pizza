@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, redirect, useNavigation } from "react-router-dom";
+import { Form, redirect, useActionData, useNavigation } from "react-router-dom";
 import { createOrder } from "../../srvices/apiRestaurant";
 
 // https://uibakery.io/regex-library/phone-number
@@ -36,6 +36,9 @@ function CreateOrder() {
   //az in estefade mikonim k vaghti dare ersal mikone dokme ersal khamosh bashe
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
+
+  //bara estefade az khata
+  const formErrors = useActionData();
   // const [withPriority, setWithPriority] = useState(false);
 
   //ma mikhaym in cart ya sabad kharid ru tu form ersal konim ta tu action besh dastresi dashte bashim
@@ -70,6 +73,7 @@ function CreateOrder() {
           <div>
             <input type="tel" name="phone" required />
           </div>
+          {formErrors?.phone && <p>{formErrors.phone}</p>}
         </div>
 
         <div>
@@ -118,6 +122,18 @@ export async function action({ request }) {
     cart: JSON.parse(data.cart),
     priority: data.priority === "on",
   };
+
+  //mamomkene tu filde pho biyaym horof benevisim required tu form faght ejbar mikone k on fild poor bashe
+  //mikhaym ag phone masaln chizi gheyre shomare bood khata bede
+  const errors = {};
+  if (!isValidPhone(order.phone))
+    errors.phone =
+      "Please give us your correct phone number. we might need it to contact you.";
+  //khob alan omadim error bara phon ru goftim agar bood ezafe kone
+  //hala mikhaym begim ag tu error hadeaghal ye sheye vojod dasht shey error ru bargardone
+  if (Object.keys(errors).length > 0) return errors;
+
+  //If everithing is okey ,create new order and redirect
   const newOrder = await createOrder(order);
   //tu apiResturant mibinim k createOrder on data ru barmigardone pas mitunim azash estefade konim ta moshtari ru b masir order/id bebarim ta sefaresh ru bbebine
   //vali nemitunim az navigate hook estefade konim chon ghabln ham goftim hook ha dar component mitunan estefade beshan faght
