@@ -105,6 +105,16 @@ export async function action({ request }) {
   //omadim formi k jam kardim ru b obj tabdil karim
   const data = Object.fromEntries(formData);
   console.log(data);
+
+  //data ru k log migereftim priority hamishe nadash faghat vaghti bood mizad on k ma mikhastim false and true bashe
+  //va mohtavaye cart ru b sorat araye dar ovordim
+  const order = {
+    ...data,
+    cart: JSON.parse(data.cart),
+    priority: data.priority === "on",
+  };
+  console.log(order);
+
   return null;
 }
 
