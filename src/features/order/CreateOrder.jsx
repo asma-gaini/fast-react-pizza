@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, redirect } from "react-router-dom";
+import { Form, redirect, useNavigation } from "react-router-dom";
 import { createOrder } from "../../srvices/apiRestaurant";
 
 // https://uibakery.io/regex-library/phone-number
@@ -33,6 +33,9 @@ const fakeCart = [
 ];
 
 function CreateOrder() {
+  //az in estefade mikonim k vaghti dare ersal mikone dokme ersal khamosh bashe
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
   // const [withPriority, setWithPriority] = useState(false);
 
   //ma mikhaym in cart ya sabad kharid ru tu form ersal konim ta tu action besh dastresi dashte bashim
@@ -90,7 +93,9 @@ function CreateOrder() {
         <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
           {/* value chon havi maghadire obj hast vali ma faghat mitunim inja string dashte bashim */}
-          <button>Order now</button>
+          <button disabled={isSubmitting}>
+            {isSubmitting ? "Placing order.." : "Order now"}
+          </button>
         </div>
       </Form>
     </div>
