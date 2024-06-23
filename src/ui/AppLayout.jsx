@@ -1,7 +1,7 @@
-import CartOverview from "../features/cart/CartOverview";
-import Header from "./Header";
-import { Outlet, useNavigation } from "react-router-dom";
-import Loader from "./Loader";
+import CartOverview from '../features/cart/CartOverview';
+import Header from './Header';
+import { Outlet, useNavigation } from 'react-router-dom';
+import Loader from './Loader';
 
 //masir asli /parent router
 function AppLayout() {
@@ -11,20 +11,20 @@ function AppLayout() {
   // bara inja moghe bargozari mizane loading vaghti bikar mishe ham mizane idle
   // pas mitunim az in estefade konim
   const navigation = useNavigation();
-  const isLoading = navigation.state === "loading";
+  const isLoading = navigation.state === 'loading';
 
   return (
-    <div className="layout">
+    <div className="grid h-screen grid-rows-[auto_1fr_auto]">
       {/* injor hame anasor paeen ru ham neshon mide vali paeen loading  */}
       {isLoading && <Loader />}
 
       <Header />
-
-      <main>
-        {/* mese ghablan k khoroji masir haye tu dar tu ba outlet namayesh dade mishod */}
-        <Outlet />
-      </main>
-
+      <div className="overflow-scroll">
+        <main className="mx-auto max-w-3xl">
+          {/* mese ghablan k khoroji masir haye tu dar tu ba outlet namayesh dade mishod */}
+          <Outlet />
+        </main>
+      </div>
       <CartOverview />
     </div>
   );
