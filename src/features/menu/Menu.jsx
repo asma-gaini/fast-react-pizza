@@ -1,13 +1,14 @@
-import { useLoaderData } from "react-router-dom";
-import { getMenu } from "../../srvices/apiRestaurant";
-import MenuItem from "./MenuItem";
+import { useLoaderData } from 'react-router-dom';
+import { getMenu } from '../../srvices/apiRestaurant';
+import MenuItem from './MenuItem';
 
 function Menu() {
   //3)get data into the component with custom hook(useLoaderData)
   const menu = useLoaderData();
 
   return (
-    <ul>
+    //class divide bara ine k beyn har chaile ul ye khat bendaze
+    <ul className="divide-y divide-stone-200 px-2">
       {menu.map((pizza) => (
         <MenuItem pizza={pizza} key={pizza.id} />
       ))}

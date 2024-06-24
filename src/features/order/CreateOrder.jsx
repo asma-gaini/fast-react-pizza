@@ -99,7 +99,7 @@ function CreateOrder() {
         <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
           {/* value chon havi maghadire obj hast vali ma faghat mitunim inja string dashte bashim */}
-          <Button disabled={isSubmitting}>
+          <Button type="primary" disabled={isSubmitting}>
             {isSubmitting ? 'Placing order..' : 'Order now'}
           </Button>
         </div>
