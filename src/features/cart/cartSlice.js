@@ -1,16 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  //   cart: [],
-  cart: [
-    {
-      pizzaId: 12,
-      name: 'mediterranean',
-      quantity: 2,
-      unitPrice: 16,
-      totalPrice: 32,
-    },
-  ],
+  cart: [],
+  // cart: [
+  //   {
+  //     pizzaId: 12,
+  //     name: 'mediterranean',
+  //     quantity: 2,
+  //     unitPrice: 16,
+  //     totalPrice: 32,
+  //   },
+  // ],
 };
 
 const cartSlice = createSlice({
@@ -52,3 +52,14 @@ export const {
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
+
+// reduce miad harkodom ro jam mikone ba baghie item hamon current hast va migim az 0 shoro she
+// va migim sum ru har bar ba quantity ee k tu cart hast jam she
+//aval ino tu cartOverView to selector anjam dadim bad ovordimesh to slice
+export const getTotalCartQuantity = (state) =>
+  state.cart.cart.reduce((sum, item) => sum + item.quantity, 0);
+
+export const getTotalCartPrice = (state) =>
+  state.cart.cart.reduce((sum, item) => sum + item.totalPrice, 0);
+
+//reselect bara selector haye redux
