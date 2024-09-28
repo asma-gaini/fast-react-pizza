@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Button from '../../ui/Button';
 import LinkButton from '../../ui/LinkButton';
 import CartItem from './CartItem';
+import { getCart } from './cartSlice';
 
 const fakeCart = [
   {
@@ -29,7 +30,7 @@ const fakeCart = [
 ];
 
 function Cart() {
-  const cart = fakeCart;
+  const cart = useSelector(getCart);
   const username = useSelector((state) => state.user.username);
 
   return (
